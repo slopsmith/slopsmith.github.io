@@ -1,26 +1,46 @@
 {% extends "ps5slop/base.html" %}
 {% block title %}{{ page.title }} · Compatibility · ps5slop{% endblock %}
+{% block description %}{{ page.title }} ({{ page.extra.title_id }}) under ps5slop: {{ page.extra.status }}.{% endblock %}
 {% block content %}
-<p class="label"><a href="{{ get_url(path='@/ps5slop/compat/_index.md') }}">Compatibility</a> / {{ page.extra.title_id }}</p>
-<h1>{{ page.title }}</h1>
-<p><span class="status">{{ config.extra.ps5slop.status[page.extra.status] }}</span></p>
-<h2>Reports</h2>
-<ol class="reports">
-  {% for r in page.extra.reports %}
-  <li>
-    <div class="report-head">
-      <span class="status">{{ config.extra.ps5slop.status[r.status] }}</span>
-      <a href="{{ r.url }}">#{{ r.issue }}</a>
-      <time datetime="{{ r.date }}">{{ r.date | truncate(length=10, end="") }}</time>
+{% set current = [] %}
+{% for s in config.extra.ps5slop.statuses %}{% if s.key == page.extra.status %}{% set_global current = s %}{% endif %}{% endfor %}
+<section class="wrap game-head">
+  <nav class="trail" aria-label="Breadcrumb"><a href="{{ get_url(path='@/ps5slop/compat/_index.md') }}">Compatibility</a> <span aria-hidden="true">/</span> <span>{{ page.extra.title_id }}</span></nav>
+  <div class="game-title">
+    <div class="game-art s-{{ page.extra.status }}" aria-hidden="true">{{ page.title | truncate(length=1, end="") }}</div>
+    <div>
+      <h1>{{ page.title }}</h1>
+      <p class="game-id"><code>{{ page.extra.title_id }}</code></p>
     </div>
-    {% if r.notes %}<p>{{ r.notes }}</p>{% endif %}
-    <dl class="env">
-      {% if r.game_version %}<div><dt>Game</dt><dd>{{ r.game_version }}</dd></div>{% endif %}
-      <div><dt>ps5slop</dt><dd>{{ r.ps5slop }}</dd></div>
-      <div><dt>macOS</dt><dd>{{ r.macos }}</dd></div>
-      <div><dt>Chip</dt><dd>{{ r.chip }}</dd></div>
-    </dl>
-  </li>
-  {% endfor %}
-</ol>
+  </div>
+  <div class="verdict">
+    {{<status status={page.extra.status} size="big" />}}
+    <p>{{ current.meaning }}</p>
+  </div>
+</section>
+
+<section class="wrap">
+  <div class="band-head">
+    <h2>Reports <span class="muted">{{ page.extra.reports | length }}</span></h2>
+    <a class="plain-link" href="{{ config.extra.ps5slop.report }}">Report this game {{<icon name="external" />}}</a>
+  </div>
+  <ol class="reports">
+    {% for r in page.extra.reports %}
+    <li class="report">
+      <div class="report-top">
+        {{<status status={r.status} />}}
+        <time datetime="{{ r.date }}">{{ r.date | truncate(length=10, end="") }}</time>
+        <a class="plain-link" href="{{ r.url }}">#{{ r.issue }}</a>
+      </div>
+      {% if r.notes %}<p class="report-notes">{{ r.notes }}</p>{% endif %}
+      <dl class="env">
+        {% if r.game_version %}<div><dt>Game version</dt><dd>{{ r.game_version }}</dd></div>{% endif %}
+        <div><dt>ps5slop</dt><dd>{{ r.ps5slop }}</dd></div>
+        <div><dt>macOS</dt><dd>{{ r.macos }}</dd></div>
+        <div><dt>Chip</dt><dd>{{ r.chip }}</dd></div>
+      </dl>
+    </li>
+    {% endfor %}
+  </ol>
+</section>
 {% endblock %}

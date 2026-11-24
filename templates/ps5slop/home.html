@@ -1,8 +1,66 @@
 {% extends "ps5slop/base.html" %}
-{% block title %}ps5slop{% endblock %}
+{% block title %}ps5slop: PS5 games on Apple Silicon Macs{% endblock %}
 {% block description %}{{ section.description }}{% endblock %}
 {% block content %}
-<h1>{{ section.title }}</h1>
-<p class="lede">{{ section.description }}</p>
-{{ section.content | safe }}
+{% set compat = get_section(path="ps5slop/compat/_index.md", metadata_only=true) %}
+<section class="hero">
+  <div class="wrap hero-grid">
+    <div class="hero-copy">
+      <h1>ps5slop</h1>
+      <p class="hero-sub">A PS5 compatibility layer for Apple Silicon Macs.</p>
+      <p class="hero-text">Bring your own games, dumped from your own console.</p>
+      <div class="actions">
+        <a class="btn btn-big" href="{{ config.extra.ps5slop.download }}">{{<icon name="download" />}}Download nightly</a>
+        <a class="btn btn-quiet btn-big" href="{{ get_url(path='@/ps5slop/docs/running.md') }}">Getting started</a>
+      </div>
+      <p class="needs">Needs macOS 26 or later on an Apple Silicon Mac.</p>
+    </div>
+    <figure class="shot">
+      <div class="shot-frame">
+        <div class="shot-empty">Screenshot</div>
+      </div>
+      <figcaption>Game screenshots go here.</figcaption>
+    </figure>
+  </div>
+</section>
+
+<div class="wrap home-grid">
+  <section class="home-main">
+    <div class="section-head">
+      <h2>Latest reports</h2>
+      <a href="{{ get_url(path='@/ps5slop/compat/_index.md') }}">All games</a>
+    </div>
+    <table class="games">
+      <tbody>
+      {% for r in compat.extra.recent %}
+      <tr>
+        <td><a class="game-link" href="{{ get_url(path='@/ps5slop/compat/' ~ r.title_id ~ '.md') }}">{{ r.name }}</a><span class="sub">ps5slop {{ r.ps5slop }} · macOS {{ r.macos }} · {{ r.chip }}</span></td>
+        <td>{{<status status={r.status} />}}</td>
+        <td class="date"><time datetime="{{ r.date }}">{{ r.date | truncate(length=10, end="") }}</time></td>
+      </tr>
+      {% endfor %}
+      </tbody>
+    </table>
+
+    <h2 class="how-title">How it works</h2>
+    <div class="prose">
+      <p>ps5slop works like Wine: instead of emulating the whole console, it runs the game on the Mac and answers its calls to the PS5's system with its own code. The game's x86-64 code goes through a JIT in a Hypervisor.framework VM, and its graphics are translated to Metal.</p>
+      {{ section.content | safe }}
+    </div>
+  </section>
+
+  <aside class="home-side">
+    <h2><a href="{{ get_url(path='@/ps5slop/compat/_index.md') }}">Compatibility</a></h2>
+    <p class="muted">{{ compat.extra.total }} games tested</p>
+    <dl class="summary">
+      {% for s in config.extra.ps5slop.statuses %}
+      <div class="s-{{ s.key }}">
+        <dt>{{ s.label }}</dt>
+        <dd><span class="sum-track"><span class="sum-bar" style="--w: {{ compat.extra.counts[s.key] / compat.extra.total }}"></span></span><span class="sum-n">{{ compat.extra.counts[s.key] }}</span></dd>
+      </div>
+      {% endfor %}
+    </dl>
+    <p><a class="btn btn-quiet" href="{{ config.extra.ps5slop.report }}">Report a game</a></p>
+  </aside>
+</div>
 {% endblock %}

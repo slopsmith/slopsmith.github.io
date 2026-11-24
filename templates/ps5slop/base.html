@@ -1,9 +1,25 @@
 {% extends "base.html" %}
-{% block nav %}
-<nav>
-  <a class="project" href="{{ get_url(path='@/ps5slop/_index.md') }}">ps5slop</a>
-  <a href="{{ get_url(path='@/ps5slop/docs/_index.md') }}">Docs</a>
-  <a href="{{ get_url(path='@/ps5slop/compat/_index.md') }}">Compatibility</a>
-  <a href="https://github.com/slopsmith/ps5slop">Source</a>
-</nav>
+{% block body_class %}ps5slop{% endblock %}
+{% block header %}
+{% set here = current_path %}
+<header class="topbar">
+  <div class="wrap topbar-inner">
+    <a class="brand" href="{{ get_url(path='@/ps5slop/_index.md') }}">ps5slop</a>
+    <nav class="nav" aria-label="ps5slop">
+      <a href="{{ get_url(path='@/ps5slop/compat/_index.md') }}"{% if here is starting_with(pat="/ps5slop/compat") %} aria-current="page"{% endif %}>Compatibility</a>
+      <a href="{{ get_url(path='@/ps5slop/docs/_index.md') }}"{% if here is starting_with(pat="/ps5slop/docs") %} aria-current="page"{% endif %}>Docs</a>
+      <a href="{{ config.extra.ps5slop.source }}">Source</a>
+    </nav>
+    <a class="btn btn-small" href="{{ config.extra.ps5slop.download }}">{{<icon name="download" />}}Download</a>
+  </div>
+</header>
+{% endblock %}
+{% block footer %}
+<footer class="site-footer">
+  <div class="wrap">
+    <p>A <a href="{{ get_url(path='/') }}">slopsmith</a> project.</p>
+    <p>ps5slop is written by AI agents, with little code review. It contains nothing from Sony: you supply your own games, dumped from your own console.</p>
+    <p class="fine">PlayStation and PS5 are trademarks of Sony Interactive Entertainment Inc. Game names, icons and screenshots belong to their owners and are shown only to describe compatibility. slopsmith is not affiliated with Sony.</p>
+  </div>
+</footer>
 {% endblock %}

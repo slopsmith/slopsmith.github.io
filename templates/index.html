@@ -1,18 +1,51 @@
 {% extends "base.html" %}
+{% block body_class %}org{% endblock %}
+{% block header %}
+<header class="topbar">
+  <div class="wrap topbar-inner">
+    <a class="brand" href="{{ get_url(path='/') }}">slopsmith</a>
+    <nav class="nav" aria-label="Site">
+      <a href="{{ get_url(path='@/ps5slop/_index.md') }}">ps5slop</a>
+      <a href="{{ config.extra.github }}">GitHub</a>
+    </nav>
+  </div>
+</header>
+{% endblock %}
 {% block content %}
-<section class="intro">
-  {{ section.content | safe }}
+{% set ps5 = get_section(path="ps5slop/_index.md") %}
+{% set compat = get_section(path="ps5slop/compat/_index.md", metadata_only=true) %}
+<section class="wrap org-hero">
+  <h1>slopsmith</h1>
+  <p class="tagline">AI-written software. Little code review, a lot of craft.</p>
+  <div class="org-intro">{{ section.content | safe }}</div>
 </section>
-<h2 class="label">Projects</h2>
-<ul class="projects">
-  {% for path in section.subsections %}
-  {% set project = get_section(path=path, metadata_only=true) %}
-  <li>
-    <a href="{{ project.permalink }}">
-      <span class="name">{{ project.title }}</span>
-      <span class="desc">{{ project.description }}</span>
-    </a>
-  </li>
-  {% endfor %}
-</ul>
+
+<section class="wrap">
+  <h2 class="section-title">Projects</h2>
+  <ul class="project-list">
+    <li class="project-row">
+      <div class="project-main">
+        <h3><a href="{{ ps5.permalink }}">ps5slop</a></h3>
+        <p>{{ ps5.description }}</p>
+        <p class="project-links">
+          <a href="{{ get_url(path='@/ps5slop/compat/_index.md') }}">Compatibility</a>
+          <a href="{{ get_url(path='@/ps5slop/docs/_index.md') }}">Docs</a>
+          <a href="{{ config.extra.ps5slop.source }}">Source</a>
+        </p>
+      </div>
+      <div class="project-side">
+        <p class="project-stat"><b>{{ compat.extra.total }}</b> games tested</p>
+        <div class="dist" role="img" aria-label="Games by status">
+          {% for s in config.extra.ps5slop.statuses %}{% if compat.extra.counts[s.key] > 0 %}<span class="seg s-{{ s.key }}" style="flex-grow: {{ compat.extra.counts[s.key] }}" title="{{ s.label }}: {{ compat.extra.counts[s.key] }}"></span>{% endif %}{% endfor %}
+        </div>
+      </div>
+    </li>
+    <li class="project-row">
+      <div class="project-main">
+        <h3>86slopper <span class="tag">Not public yet</span></h3>
+        <p>An x86-32 PC emulator for Apple Silicon Macs. The goal is to run Windows XP faster than QEMU's TCG, by running translated code in a Hypervisor.framework VM where x86 paging maps onto the Mac's own MMU. The name may change.</p>
+      </div>
+    </li>
+  </ul>
+</section>
 {% endblock %}

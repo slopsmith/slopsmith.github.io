@@ -1,10 +1,16 @@
 {% extends "ps5slop/base.html" %}
 {% block title %}Docs · ps5slop{% endblock %}
 {% block content %}
-<h1>Docs</h1>
-<ul class="doc-list">
-  {% for page in section.pages %}
-  <li><a href="{{ page.permalink }}">{{ page.title }}</a></li>
-  {% endfor %}
-</ul>
+<div class="wrap docs">
+  {% include "ps5slop/docs-nav.html" %}
+  <article class="doc-main">
+    <h1>Docs</h1>
+    <p class="lede">How to build ps5slop, start a game and use the launcher app.</p>
+    <ul class="doc-index">
+      {% for p in section.pages %}
+      <li><a href="{{ p.permalink }}">{{ p.title }} {{<icon name="arrow" />}}</a></li>
+      {% endfor %}
+    </ul>
+  </article>
+</div>
 {% endblock %}

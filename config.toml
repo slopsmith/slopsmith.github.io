@@ -6,10 +6,40 @@ compile_sass = false
 build_search_index = false
 generate_feeds = false
 
-[extra.ps5slop.status]
-perfect = "⭐ Perfect"
-playable = "🟢 Playable"
-ingame = "🟡 Ingame"
-menus = "🟠 Menus"
-boots = "🔴 Boots"
-nothing = "⚫ Nothing"
+[extra]
+github = "https://github.com/slopsmith"
+
+[extra.ps5slop]
+source = "https://github.com/slopsmith/ps5slop"
+download = "https://github.com/slopsmith/ps5slop/releases"
+report = "https://github.com/slopsmith/ps5slop-compat/issues/new/choose"
+
+[[extra.ps5slop.statuses]]
+key = "perfect"
+label = "Perfect"
+meaning = "Plays through with no known problems."
+
+[[extra.ps5slop.statuses]]
+key = "playable"
+label = "Playable"
+meaning = "Can be played start to end. May have glitches or slowdowns."
+
+[[extra.ps5slop.statuses]]
+key = "ingame"
+label = "Ingame"
+meaning = "Gets into gameplay, but problems keep it from being played properly."
+
+[[extra.ps5slop.statuses]]
+key = "menus"
+label = "Menus"
+meaning = "Reaches the title screen or menus, not gameplay."
+
+[[extra.ps5slop.statuses]]
+key = "boots"
+label = "Boots"
+meaning = "Starts and shows something, like a logo, but no menus."
+
+[[extra.ps5slop.statuses]]
+key = "nothing"
+label = "Nothing"
+meaning = "Stops or crashes before showing anything."

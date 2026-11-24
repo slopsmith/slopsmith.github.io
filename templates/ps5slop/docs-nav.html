@@ -1,0 +1,8 @@
+<nav class="doc-nav" aria-label="Docs">
+  <a class="doc-nav-head" href="{{ get_url(path='@/ps5slop/docs/_index.md') }}">Docs</a>
+  <ul>
+    {% for p in section.pages %}
+    <li><a href="{{ p.permalink }}"{% if page and page.permalink == p.permalink %} aria-current="page"{% endif %}>{{ p.title }}</a></li>
+    {% endfor %}
+  </ul>
+</nav>

@@ -1,30 +1,54 @@
 {% extends "ps5slop/base.html" %}
 {% block title %}Compatibility · ps5slop{% endblock %}
+{% block description %}How far each game gets under ps5slop, from player reports.{% endblock %}
 {% block content %}
-<h1>Compatibility</h1>
-<p class="lede">How far each game gets, from reports by people who ran it. A game's status comes from its newest report.</p>
-<dl class="legend">
-  <div><dt><span class="status">{{ config.extra.ps5slop.status["perfect"] }}</span></dt><dd>Plays through with no known problems.</dd></div>
-  <div><dt><span class="status">{{ config.extra.ps5slop.status["playable"] }}</span></dt><dd>Can be played start to end; may have glitches or slowdowns.</dd></div>
-  <div><dt><span class="status">{{ config.extra.ps5slop.status["ingame"] }}</span></dt><dd>Gets into gameplay, but problems keep it from being played properly.</dd></div>
-  <div><dt><span class="status">{{ config.extra.ps5slop.status["menus"] }}</span></dt><dd>Reaches the title screen or menus, not gameplay.</dd></div>
-  <div><dt><span class="status">{{ config.extra.ps5slop.status["boots"] }}</span></dt><dd>Starts and shows something, no menus.</dd></div>
-  <div><dt><span class="status">{{ config.extra.ps5slop.status["nothing"] }}</span></dt><dd>Stops or crashes before showing anything.</dd></div>
-</dl>
-<div class="table-wrap">
-<table>
-  <thead><tr><th>Game</th><th>Title ID</th><th>Status</th><th>Reports</th></tr></thead>
-  <tbody>
-  {% for page in section.pages %}
-  <tr>
-    <td><a href="{{ page.permalink }}">{{ page.title }}</a></td>
-    <td><code>{{ page.extra.title_id }}</code></td>
-    <td><span class="status">{{ config.extra.ps5slop.status[page.extra.status] }}</span></td>
-    <td>{{ page.extra.reports | length }}</td>
-  </tr>
-  {% endfor %}
-  </tbody>
-</table>
-</div>
-<p>The data is also at <a href="{{ get_url(path='ps5slop/compat.json') }}">compat.json</a>.</p>
+<section class="wrap page-head">
+  <div>
+    <h1>Compatibility</h1>
+    <p class="lede">How far each game gets, from reports by people who ran it. A game's status comes from its newest report.</p>
+  </div>
+  <a class="btn" href="{{ config.extra.ps5slop.report }}">Report a game</a>
+</section>
+
+<section class="wrap" data-compat>
+  <div class="filters" role="group" aria-label="Filter by status">
+    <button type="button" class="chip" data-filter="" aria-pressed="true">All <b>{{ section.extra.total }}</b></button>
+    {% for s in config.extra.ps5slop.statuses %}
+    <button type="button" class="chip" data-filter="{{ s.key }}" aria-pressed="false"{% if section.extra.counts[s.key] == 0 %} disabled{% endif %}><i class="dot s-{{ s.key }}"></i>{{ s.label }} <b>{{ section.extra.counts[s.key] }}</b></button>
+    {% endfor %}
+  </div>
+  <label class="search">
+    {{<icon name="search" />}}
+    <span class="visually-hidden">Search games</span>
+    <input type="search" placeholder="Search by name or title ID" data-search autocomplete="off">
+  </label>
+
+  <div class="table-wrap">
+    <table class="games">
+      <thead><tr><th scope="col">Game</th><th scope="col">Status</th><th scope="col" class="num">Reports</th><th scope="col">Last report</th></tr></thead>
+      <tbody>
+      {% for page in section.pages %}
+      <tr data-status="{{ page.extra.status }}" data-text="{{ page.title | lower }} {{ page.extra.title_id | lower }}">
+        <td><a class="game-link" href="{{ page.permalink }}"><b>{{ page.title }}</b><code>{{ page.extra.title_id }}</code></a></td>
+        <td>{{<status status={page.extra.status} />}}</td>
+        <td class="num">{{ page.extra.reports | length }}</td>
+        <td><time datetime="{{ page.extra.reports[0].date }}">{{ page.extra.reports[0].date | truncate(length=10, end="") }}</time></td>
+      </tr>
+      {% endfor %}
+      </tbody>
+    </table>
+    <p class="empty" data-empty hidden>No games match. Try another status or search, or <a href="{{ config.extra.ps5slop.report }}">report a game</a> that isn't listed.</p>
+  </div>
+</section>
+
+<section class="wrap legend-block">
+  <h2>What the statuses mean</h2>
+  <dl class="legend">
+    {% for s in config.extra.ps5slop.statuses %}
+    <div><dt>{{<status status={s.key} />}}</dt><dd>{{ s.meaning }}</dd></div>
+    {% endfor %}
+  </dl>
+  <p class="muted">The data is also available as <a href="{{ get_url(path='ps5slop/compat.json') }}">compat.json</a>, which the ps5slop launcher reads.</p>
+</section>
+<script src="{{ get_url(path='compat.js', cachebust=true) }}" defer></script>
 {% endblock %}
