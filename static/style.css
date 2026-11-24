@@ -106,3 +106,6 @@ footer.site {
   color: var(--muted);
   font-size: 0.875rem;
 }
+
+.doc-list { padding-left: 1.25rem; }
+.doc table { display: block; overflow-x: auto; }
