@@ -1,0 +1,7 @@
+base_url = "https://slopsmith.github.io"
+title = "slopsmith"
+description = "AI-written software. Little code review, a lot of craft."
+default_language = "en"
+compile_sass = false
+build_search_index = false
+generate_feeds = false

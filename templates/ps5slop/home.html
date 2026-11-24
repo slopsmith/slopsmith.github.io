@@ -1,0 +1,8 @@
+{% extends "ps5slop/base.html" %}
+{% block title %}ps5slop{% endblock %}
+{% block description %}{{ section.description }}{% endblock %}
+{% block content %}
+<h1>{{ section.title }}</h1>
+<p class="lede">{{ section.description }}</p>
+{{ section.content | safe }}
+{% endblock %}
