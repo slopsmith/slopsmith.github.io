@@ -1,10 +1,11 @@
 {% extends "base.html" %}
 {% block body_class %}ps5slop{% endblock %}
+{% block head %}<link rel="icon" type="image/png" href="{{ get_url(path='ps5slop/favicon.png') }}">{% endblock %}
 {% block header %}
 {% set here = current_path %}
 <header class="topbar">
   <div class="wrap topbar-inner">
-    <a class="brand" href="{{ get_url(path='@/ps5slop/_index.md') }}">ps5slop</a>
+    <a class="brand" href="{{ get_url(path='@/ps5slop/_index.md') }}"><img src="{{ get_url(path='ps5slop/icon.png') }}" alt="" width="28" height="28">ps5slop</a>
     <nav class="nav" aria-label="ps5slop">
       <a href="{{ get_url(path='@/ps5slop/compat/_index.md') }}"{% if here is starting_with(pat="/ps5slop/compat") %} aria-current="page"{% endif %}>Compatibility</a>
       <a href="{{ get_url(path='@/ps5slop/docs/_index.md') }}"{% if here is starting_with(pat="/ps5slop/docs") %} aria-current="page"{% endif %}>Docs</a>
