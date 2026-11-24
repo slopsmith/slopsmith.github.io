@@ -7,13 +7,7 @@ use serde::{Deserialize, Serialize};
 
 const ACCEPTED: &str = "accepted";
 
-const SECTION: &str = r#"+++
-title = "Compatibility"
-template = "ps5slop/compat.html"
-page_template = "ps5slop/title.html"
-sort_by = "weight"
-+++
-"#;
+const RECENT: usize = 5;
 
 #[derive(Deserialize)]
 pub struct Issue {
@@ -41,6 +35,8 @@ pub enum Status {
 }
 
 impl Status {
+    const ALL: [Self; 6] = [Self::Perfect, Self::Playable, Self::Ingame, Self::Menus, Self::Boots, Self::Nothing];
+
     fn parse(s: &str) -> Option<Self> {
         let word = s.split_whitespace().last()?.to_ascii_lowercase();
         Some(match word.as_str() {
@@ -103,6 +99,30 @@ struct CompatJson<'a> {
 }
 
 #[derive(Serialize)]
+struct SectionFrontMatter<'a> {
+    title: &'a str,
+    template: &'a str,
+    page_template: &'a str,
+    sort_by: &'a str,
+    extra: SectionExtra,
+}
+
+#[derive(Serialize)]
+struct SectionExtra {
+    total: usize,
+    counts: BTreeMap<Status, usize>,
+    recent: Vec<RecentReport>,
+}
+
+#[derive(Serialize)]
+struct RecentReport {
+    title_id: String,
+    name: String,
+    #[serde(flatten)]
+    report: Report,
+}
+
+#[derive(Serialize)]
 struct FrontMatter<'a> {
     title: &'a str,
     weight: usize,
@@ -125,7 +145,14 @@ pub fn run(issues_file: &Path, out: &Path, json_out: &Path) -> anyhow::Result<()
         fs::remove_dir_all(out)?;
     }
     fs::create_dir_all(out)?;
-    fs::write(out.join("_index.md"), SECTION)?;
+    let section = SectionFrontMatter {
+        title: "Compatibility",
+        template: "ps5slop/compat.html",
+        page_template: "ps5slop/title.html",
+        sort_by: "weight",
+        extra: summarize(&titles),
+    };
+    fs::write(out.join("_index.md"), format!("+++\n{}+++\n", toml::to_string(&section)?))?;
 
     let mut order: Vec<(&String, &Title)> = titles.iter().collect();
     order.sort_by(|a, b| a.1.status.cmp(&b.1.status).then_with(|| a.1.name.cmp(&b.1.name)));
@@ -168,6 +195,23 @@ fn collect(issues: &[Issue]) -> BTreeMap<String, Title> {
         title.status = title.reports[0].status;
     }
     titles
+}
+
+/// Counts titles per status and picks the newest reports across all titles.
+fn summarize(titles: &BTreeMap<String, Title>) -> SectionExtra {
+    let mut counts: BTreeMap<Status, usize> = Status::ALL.iter().map(|s| (*s, 0)).collect();
+    let mut recent = Vec::new();
+    for (id, title) in titles {
+        *counts.get_mut(&title.status).unwrap() += 1;
+        recent.extend(title.reports.iter().map(|r| RecentReport {
+            title_id: id.clone(),
+            name: title.name.clone(),
+            report: r.clone(),
+        }));
+    }
+    recent.sort_by(|a, b| b.report.date.cmp(&a.report.date));
+    recent.truncate(RECENT);
+    SectionExtra { total: titles.len(), counts, recent }
 }
 
 fn parse(issue: &Issue) -> Option<(String, String, Report)> {
@@ -255,6 +299,15 @@ mod tests {
     fn reports_without_environment_are_skipped() {
         let body = "### Title ID\n\nPPSA1\n\n### Status\n\n⭐ Perfect\n\n### Chip\n\n_No response_\n";
         assert!(parse(&issue(body, true)).is_none());
+    }
+
+    #[test]
+    fn summary_counts_every_status() {
+        let body = format!("### Title ID\n\nPPSA1\n\n### Status\n\n🟡 Ingame\n\n{ENV}");
+        let summary = summarize(&collect(&[issue(&body, true)]));
+        assert_eq!(summary.counts.len(), 6);
+        assert_eq!(summary.counts[&Status::Ingame], 1);
+        assert_eq!(summary.recent.len(), 1);
     }
 
     #[test]
