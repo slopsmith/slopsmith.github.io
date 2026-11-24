@@ -1,0 +1,43 @@
+{% extends "pcslop/base.html" %}
+{% block title %}pcslop: Windows XP on Apple Silicon Macs{% endblock %}
+{% block description %}{{ section.description }}{% endblock %}
+{% block content %}
+<section class="hero">
+  <div class="wrap hero-grid">
+    <div class="hero-copy">
+      <h1><img class="hero-icon" src="{{ get_url(path='pcslop/icon.png') }}" alt="" width="64" height="64">pcslop</h1>
+      <p class="hero-sub">{{ section.description }}</p>
+      <p class="hero-text">Built to run Windows XP faster than QEMU.</p>
+      <div class="actions">
+        <a class="btn btn-big" href="{{ config.extra.pcslop.download }}">{{<icon name="download" />}}Download nightly</a>
+        <a class="btn btn-quiet btn-big" href="{{ config.extra.pcslop.source }}">Source</a>
+      </div>
+      <p class="needs">Needs macOS 26 or later on an Apple Silicon Mac.</p>
+    </div>
+    <figure class="shot shot-window">
+      <img src="{{ get_url(path='pcslop/xp-desktop.webp') }}" alt="Windows XP's desktop in a pcslop window" width="1216" height="992">
+    </figure>
+  </div>
+</section>
+
+<div class="wrap home-grid">
+  <section class="home-main">
+    <h2>How it works</h2>
+    <div class="prose">
+      <p>pcslop translates the guest's x86 code to ARM and runs it inside a Hypervisor.framework VM. The guest's page tables map onto the Mac's own MMU, so a memory access is a single ARM load or store, and most page faults never leave the VM.</p>
+    </div>
+  </section>
+
+  <aside class="home-side">
+    <h2>The machine</h2>
+    <dl class="specs">
+      <div><dt>CPU</dt><dd>x86-32 with x87 and SSE</dd></div>
+      <div><dt>Board</dt><dd>Intel 440FX, or 440BX with AGP</dd></div>
+      <div><dt>Graphics</dt><dd>Standard VGA, or an ATI Radeon 9700 Pro drawn with Metal</dd></div>
+      <div><dt>Sound</dt><dd>AC'97</dd></div>
+      <div><dt>Network</dt><dd>RTL8139</dd></div>
+      <div><dt>Firmware</dt><dd>SeaBIOS</dd></div>
+    </dl>
+  </aside>
+</div>
+{% endblock %}

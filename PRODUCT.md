@@ -17,8 +17,8 @@ Both get equal weight.
 
 The site for the slopsmith GitHub org: AI-written software with little code review and a lot of craft. Each project gets its own section under `slopsmith.github.io/<project>`.
 
-- **ps5slop**: a PS5 compatibility layer for Apple Silicon Macs. Its section has the user docs, a compatibility database built from GitHub issues, and (once public) nightly downloads of `ps5slop.app`.
-- **86slopper** (rename pending): an x86-32 PC emulator for Apple Silicon Macs that aims to run Windows XP faster than QEMU's TCG, using Hypervisor.framework. It joins the site later.
+- **ps5slop**: a PS5 compatibility layer for Apple Silicon Macs. Its section has the user docs, a compatibility database built from GitHub issues, and nightly downloads of `ps5slop.app`.
+- **pcslop**: an x86-32 PC emulator for Apple Silicon Macs that aims to run Windows XP faster than QEMU's TCG, using Hypervisor.framework.
 
 ## Positioning
 
@@ -40,7 +40,7 @@ Every project is written by AI agents with almost no human review of the code, a
 
 - Docs: `docs/user/` in `slopsmith/ps5slop`, due for a rewrite.
 - Compatibility data: 7 titles from the old `COMPATIBILITY.md`, as sample issues in `fixtures/ps5slop-issues.json`.
-- No screenshots, box art or game icons yet. They will be collected later; game icons are allowed with the disclaimer. Do not invent them.
+- pcslop: one screenshot of the Windows XP desktop. ps5slop: no screenshots, box art or game icons yet. They will be collected later; game icons are allowed with the disclaimer. Do not invent them.
 
 ## Product Principles
 

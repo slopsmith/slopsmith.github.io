@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% block body_class %}pcslop{% endblock %}
+{% block head %}<link rel="icon" type="image/png" href="{{ get_url(path='pcslop/favicon.png') }}">{% endblock %}
+{% block header %}
+<header class="topbar">
+  <div class="wrap topbar-inner">
+    <a class="brand" href="{{ get_url(path='@/pcslop/_index.md') }}"><img src="{{ get_url(path='pcslop/icon.png') }}" alt="" width="28" height="28">pcslop</a>
+    <nav class="nav" aria-label="pcslop">
+      <a href="{{ config.extra.pcslop.source }}">Source</a>
+    </nav>
+    <a class="btn btn-small" href="{{ config.extra.pcslop.download }}">{{<icon name="download" />}}Download</a>
+  </div>
+</header>
+{% endblock %}
+{% block footer %}
+<footer class="site-footer">
+  <div class="wrap">
+    <p>A <a href="{{ get_url(path='/') }}">slopsmith</a> project.</p>
+    <p>pcslop is written by AI agents, with little code review. It contains no Windows code: you install Windows from your own disc.</p>
+    <p class="fine">Windows is a trademark of Microsoft Corporation. ATI and Radeon are trademarks of Advanced Micro Devices, Inc. slopsmith is not affiliated with either. Screenshots of Windows are shown only to describe compatibility.</p>
+  </div>
+</footer>
+{% endblock %}

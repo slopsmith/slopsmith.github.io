@@ -142,7 +142,6 @@ main { display: block; padding-bottom: 5rem; }
 .project-side { align-self: center; }
 .project-stat { margin-bottom: 0.6rem; color: var(--text-2); }
 .project-stat b { color: var(--text); font-size: 1.25rem; font-variant-numeric: tabular-nums; }
-.tag { padding: 0.15rem 0.55rem; border-radius: 999px; background: var(--bg-3); color: var(--text-2); font-size: 0.8rem; font-weight: 500; letter-spacing: 0; }
 
 .dist { display: flex; gap: 2px; height: 8px; border-radius: 2px; overflow: hidden; }
 .dist .seg { background: var(--c); min-width: 4px; }
@@ -309,3 +308,10 @@ main { display: block; padding-bottom: 5rem; }
   .games .date { display: none; }
   .game-art { width: 4rem; font-size: 1.75rem; }
 }
+
+.specs { margin: 0.75rem 0 0; font-size: 0.92rem; }
+.specs div { padding-block: 0.55rem; border-bottom: 1px solid var(--line); }
+.specs dt { color: var(--text-3); font-size: 0.82rem; }
+.specs dd { margin: 0.1rem 0 0; color: var(--text-2); }
+.home-main > h2:first-child { margin: 0 0 1rem; }
+.shot-window img { display: block; width: 100%; height: auto; }

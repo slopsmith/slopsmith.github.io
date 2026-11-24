@@ -6,6 +6,7 @@
     <a class="brand" href="{{ get_url(path='/') }}">slopsmith</a>
     <nav class="nav" aria-label="Site">
       <a href="{{ get_url(path='@/ps5slop/_index.md') }}">ps5slop</a>
+      <a href="{{ get_url(path='@/pcslop/_index.md') }}">pcslop</a>
       <a href="{{ config.extra.github }}">GitHub</a>
     </nav>
   </div>
@@ -13,6 +14,7 @@
 {% endblock %}
 {% block content %}
 {% set ps5 = get_section(path="ps5slop/_index.md") %}
+{% set pc = get_section(path="pcslop/_index.md", metadata_only=true) %}
 {% set compat = get_section(path="ps5slop/compat/_index.md", metadata_only=true) %}
 <section class="wrap org-hero">
   <h1>slopsmith</h1>
@@ -42,8 +44,11 @@
     </li>
     <li class="project-row">
       <div class="project-main">
-        <h3>86slopper <span class="tag">Not public yet</span></h3>
-        <p>An x86-32 PC emulator for Apple Silicon Macs. The goal is to run Windows XP faster than QEMU's TCG, by running translated code in a Hypervisor.framework VM where x86 paging maps onto the Mac's own MMU. The name may change.</p>
+        <h3><a class="project-name" href="{{ pc.permalink }}"><img src="{{ get_url(path='pcslop/icon.png') }}" alt="" width="36" height="36">pcslop</a></h3>
+        <p>{{ pc.description }}</p>
+        <p class="project-links">
+          <a href="{{ config.extra.pcslop.source }}">Source</a>
+        </p>
       </div>
     </li>
   </ul>

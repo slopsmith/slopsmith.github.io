@@ -9,6 +9,10 @@ generate_feeds = false
 [extra]
 github = "https://github.com/slopsmith"
 
+[extra.pcslop]
+source = "https://github.com/slopsmith/pcslop"
+download = "https://github.com/slopsmith/pcslop/releases"
+
 [extra.ps5slop]
 source = "https://github.com/slopsmith/ps5slop"
 download = "https://github.com/slopsmith/ps5slop/releases"
