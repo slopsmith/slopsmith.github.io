@@ -1,0 +1,30 @@
+{% extends "ps5slop/base.html" %}
+{% block title %}Compatibility · ps5slop{% endblock %}
+{% block content %}
+<h1>Compatibility</h1>
+<p class="lede">How far each game gets, from reports by people who ran it. A game's status comes from its newest report.</p>
+<dl class="legend">
+  <div><dt><span class="status">{{ config.extra.ps5slop.status["perfect"] }}</span></dt><dd>Plays through with no known problems.</dd></div>
+  <div><dt><span class="status">{{ config.extra.ps5slop.status["playable"] }}</span></dt><dd>Can be played start to end; may have glitches or slowdowns.</dd></div>
+  <div><dt><span class="status">{{ config.extra.ps5slop.status["ingame"] }}</span></dt><dd>Gets into gameplay, but problems keep it from being played properly.</dd></div>
+  <div><dt><span class="status">{{ config.extra.ps5slop.status["menus"] }}</span></dt><dd>Reaches the title screen or menus, not gameplay.</dd></div>
+  <div><dt><span class="status">{{ config.extra.ps5slop.status["boots"] }}</span></dt><dd>Starts and shows something, no menus.</dd></div>
+  <div><dt><span class="status">{{ config.extra.ps5slop.status["nothing"] }}</span></dt><dd>Stops or crashes before showing anything.</dd></div>
+</dl>
+<div class="table-wrap">
+<table>
+  <thead><tr><th>Game</th><th>Title ID</th><th>Status</th><th>Reports</th></tr></thead>
+  <tbody>
+  {% for page in section.pages %}
+  <tr>
+    <td><a href="{{ page.permalink }}">{{ page.title }}</a></td>
+    <td><code>{{ page.extra.title_id }}</code></td>
+    <td><span class="status">{{ config.extra.ps5slop.status[page.extra.status] }}</span></td>
+    <td>{{ page.extra.reports | length }}</td>
+  </tr>
+  {% endfor %}
+  </tbody>
+</table>
+</div>
+<p>The data is also at <a href="{{ get_url(path='ps5slop/compat.json') }}">compat.json</a>.</p>
+{% endblock %}

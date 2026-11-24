@@ -1,3 +1,4 @@
+mod compat;
 mod docs;
 
 use std::path::PathBuf;
@@ -21,10 +22,21 @@ enum Command {
         #[arg(long, default_value = "content/ps5slop/docs")]
         out: PathBuf,
     },
+    /// Build ps5slop's compatibility pages and compat.json from report issues.
+    Compat {
+        /// Issues as returned by GitHub's REST API.
+        #[arg(long)]
+        issues: PathBuf,
+        #[arg(long, default_value = "content/ps5slop/compat")]
+        out: PathBuf,
+        #[arg(long, default_value = "static/ps5slop/compat.json")]
+        json: PathBuf,
+    },
 }
 
 fn main() -> anyhow::Result<()> {
     match Cli::parse().command {
         Command::Docs { ps5slop, out } => docs::run(&ps5slop.join("docs/user"), &out),
+        Command::Compat { issues, out, json } => compat::run(&issues, &out, &json),
     }
 }

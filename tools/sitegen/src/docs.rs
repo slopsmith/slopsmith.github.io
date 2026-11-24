@@ -93,6 +93,9 @@ fn resolve(target: &str, names: &BTreeSet<String>) -> Option<String> {
     if names.contains(path) {
         return Some(format!("@/ps5slop/docs/{path}{anchor}"));
     }
+    if path == "../../COMPATIBILITY.md" {
+        return Some("@/ps5slop/compat/_index.md".to_string());
+    }
     None
 }
 

@@ -1,0 +1,26 @@
+{% extends "ps5slop/base.html" %}
+{% block title %}{{ page.title }} · Compatibility · ps5slop{% endblock %}
+{% block content %}
+<p class="label"><a href="{{ get_url(path='@/ps5slop/compat/_index.md') }}">Compatibility</a> / {{ page.extra.title_id }}</p>
+<h1>{{ page.title }}</h1>
+<p><span class="status">{{ config.extra.ps5slop.status[page.extra.status] }}</span></p>
+<h2>Reports</h2>
+<ol class="reports">
+  {% for r in page.extra.reports %}
+  <li>
+    <div class="report-head">
+      <span class="status">{{ config.extra.ps5slop.status[r.status] }}</span>
+      <a href="{{ r.url }}">#{{ r.issue }}</a>
+      <time datetime="{{ r.date }}">{{ r.date | truncate(length=10, end="") }}</time>
+    </div>
+    {% if r.notes %}<p>{{ r.notes }}</p>{% endif %}
+    <dl class="env">
+      {% if r.game_version %}<div><dt>Game</dt><dd>{{ r.game_version }}</dd></div>{% endif %}
+      <div><dt>ps5slop</dt><dd>{{ r.ps5slop }}</dd></div>
+      <div><dt>macOS</dt><dd>{{ r.macos }}</dd></div>
+      <div><dt>Chip</dt><dd>{{ r.chip }}</dd></div>
+    </dl>
+  </li>
+  {% endfor %}
+</ol>
+{% endblock %}

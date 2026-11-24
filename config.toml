@@ -5,3 +5,11 @@ default_language = "en"
 compile_sass = false
 build_search_index = false
 generate_feeds = false
+
+[extra.ps5slop.status]
+perfect = "⭐ Perfect"
+playable = "🟢 Playable"
+ingame = "🟡 Ingame"
+menus = "🟠 Menus"
+boots = "🔴 Boots"
+nothing = "⚫ Nothing"

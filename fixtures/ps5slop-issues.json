@@ -1,0 +1,106 @@
+[
+  {
+    "number": 1,
+    "title": "Balatro (PPSA21402): ⭐ Perfect",
+    "html_url": "https://github.com/slopsmith/ps5slop-compat/issues/1",
+    "created_at": "2026-11-20T12:00:00Z",
+    "labels": [
+      {
+        "name": "accepted"
+      }
+    ],
+    "body": "### Title ID\n\nPPSA21402\n\n### Game name\n\nBalatro\n\n### Game version\n\n01.015.000\n\n### Status\n\n⭐ Perfect\n\n### Notes\n\nplays normally with sound.\n\n### macOS version\n\n26.1\n\n### Chip\n\nApple M4 Pro\n\n### ps5slop version\n\ntrunk (sample)\n"
+  },
+  {
+    "number": 2,
+    "title": "Minecraft (PPSA17221): 🟢 Playable",
+    "html_url": "https://github.com/slopsmith/ps5slop-compat/issues/2",
+    "created_at": "2026-11-20T12:00:00Z",
+    "labels": [
+      {
+        "name": "accepted"
+      }
+    ],
+    "body": "### Title ID\n\nPPSA17221\n\n### Game name\n\nMinecraft\n\n### Game version\n\nv26.10\n\n### Status\n\n🟢 Playable\n\n### Notes\n\nworlds and Vibrant Visuals render (VV about 20 fps, particle and far-water glitches); sound plays.\n\n### macOS version\n\n26.1\n\n### Chip\n\nApple M4 Pro\n\n### ps5slop version\n\ntrunk (sample)\n"
+  },
+  {
+    "number": 3,
+    "title": "The Binding of Isaac: Repentance (PPSA03311): 🟢 Playable",
+    "html_url": "https://github.com/slopsmith/ps5slop-compat/issues/3",
+    "created_at": "2026-11-20T12:00:00Z",
+    "labels": [
+      {
+        "name": "accepted"
+      }
+    ],
+    "body": "### Title ID\n\nPPSA03311\n\n### Game name\n\nThe Binding of Isaac: Repentance\n\n### Game version\n\n01.000\n\n### Status\n\n🟢 Playable\n\n### Notes\n\nplays at about 52 fps. Screen filter setting not rechecked.\n\n### macOS version\n\n26.1\n\n### Chip\n\nApple M4 Pro\n\n### ps5slop version\n\ntrunk (sample)\n"
+  },
+  {
+    "number": 4,
+    "title": "Grand Theft Auto V (PPSA04263): 🟡 Ingame",
+    "html_url": "https://github.com/slopsmith/ps5slop-compat/issues/4",
+    "created_at": "2026-11-20T12:00:00Z",
+    "labels": [
+      {
+        "name": "accepted"
+      }
+    ],
+    "body": "### Title ID\n\nPPSA04263\n\n### Game name\n\nGrand Theft Auto V\n\n### Game version\n\nEU v1.011.001 (.pkg)\n\n### Status\n\n🟡 Ingame\n\n### Notes\n\nprologue ~4.3 fps in Fidelity (Performance ~13.5), plays past the vault blast to \"Collect the cash\"; no audio.\n\n### macOS version\n\n26.1\n\n### Chip\n\nApple M4 Pro\n\n### ps5slop version\n\ntrunk (sample)\n"
+  },
+  {
+    "number": 5,
+    "title": "Superliminal (PPSA06084): 🟡 Ingame",
+    "html_url": "https://github.com/slopsmith/ps5slop-compat/issues/5",
+    "created_at": "2026-11-20T12:00:00Z",
+    "labels": [
+      {
+        "name": "accepted"
+      }
+    ],
+    "body": "### Title ID\n\nPPSA06084\n\n### Game name\n\nSuperliminal\n\n### Game version\n\n01.010 (.pkg)\n\n### Status\n\n🟡 Ingame\n\n### Notes\n\nmenu ~20 s; level 1 passes the rook and looks as on PC (lighting, AO, no glows).\n\n### macOS version\n\n26.1\n\n### Chip\n\nApple M4 Pro\n\n### ps5slop version\n\ntrunk (sample)\n"
+  },
+  {
+    "number": 6,
+    "title": "Astro Bot (PPSA21564): 🟠 Menus",
+    "html_url": "https://github.com/slopsmith/ps5slop-compat/issues/6",
+    "created_at": "2026-11-20T12:00:00Z",
+    "labels": [
+      {
+        "name": "accepted"
+      }
+    ],
+    "body": "### Title ID\n\nPPSA21564\n\n### Game name\n\nAstro Bot\n\n### Game version\n\nv1.019 (.pkg)\n\n### Status\n\n🟠 Menus\n\n### Notes\n\ntitle at 50-70 s, logo as on PS5, backdrop pink; ship and Astro missing. Needs `scripts/fetch-fonts`.\n\n### macOS version\n\n26.1\n\n### Chip\n\nApple M4 Pro\n\n### ps5slop version\n\ntrunk (sample)\n"
+  },
+  {
+    "number": 7,
+    "title": "Deltarune (PS4) (CUSA52463): ⚫ Nothing",
+    "html_url": "https://github.com/slopsmith/ps5slop-compat/issues/7",
+    "created_at": "2026-11-20T12:00:00Z",
+    "labels": [
+      {
+        "name": "accepted"
+      }
+    ],
+    "body": "### Title ID\n\nCUSA52463\n\n### Game name\n\nDeltarune (PS4)\n\n### Game version\n\nv1.12 (patch over base .pkg)\n\n### Status\n\n⚫ Nothing\n\n### Notes\n\ngame loop runs; nothing drawn, PS4 Gnm rendering is out of scope.\n\n### macOS version\n\n26.1\n\n### Chip\n\nApple M4 Pro\n\n### ps5slop version\n\ntrunk (sample)\n"
+  },
+  {
+    "number": 8,
+    "title": "Balatro (PPSA21402): launcher report",
+    "html_url": "https://github.com/slopsmith/ps5slop-compat/issues/8",
+    "created_at": "2026-11-23T09:30:00Z",
+    "labels": [
+      {
+        "name": "accepted"
+      }
+    ],
+    "body": "### Title ID\n\nPPSA21402\n\n### Game name\n\nBalatro\n\n### Game version\n\n01.015.000\n\n### Anything on screen?\n\nYes\n\n### Reached the title screen or menus?\n\nYes\n\n### Reached gameplay?\n\nYes\n\n### Played through, or a long session for endless games?\n\nYes\n\n### Anything broken?\n\nYes\n\n### Played it fully?\n\nNo\n\n### Notes\n\nSample launcher report: the music crackled once.\n\n### macOS version\n\n26.2\n\n### Chip\n\nApple M2\n\n### ps5slop version\n\nnightly-2026-11-23\n"
+  },
+  {
+    "number": 9,
+    "title": "Missing environment",
+    "html_url": "https://github.com/slopsmith/ps5slop-compat/issues/99",
+    "created_at": "2026-11-23T10:00:00Z",
+    "labels": [],
+    "body": "### Title ID\n\nPPSA00001\n\n### Status\n\n⭐ Perfect\n"
+  }
+]
